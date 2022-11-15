@@ -52,8 +52,6 @@ def login_user():
     try:
         user = mongo_client.users.find_one({"email" : user_request['email']})
 
-        print(user['password'], user['email'])
-
         if not user or not validate_password(user['password'], user_request['password']):
             return {"error": "Suas credenciais estão incorretas!", "status_code": 401}
 
