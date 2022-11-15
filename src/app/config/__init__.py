@@ -13,6 +13,7 @@ class Development(object):
     SECRET_KEY = os.getenv('SECRET_KEY')
     GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
     OAUTHLIB_INSECURE_TRANSPORT = os.getenv('OAUTHLIB_INSECURE_TRANSPORT')
+    FRONTEND_URL = os.getenv("FRONTEND_URL")
 
 class Production(object):
     TESTING = False 

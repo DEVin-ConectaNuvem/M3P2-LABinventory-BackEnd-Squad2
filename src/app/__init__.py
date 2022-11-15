@@ -12,6 +12,10 @@ from src.app.models.collaborators import create_collection_collaborators
 
 app = Flask(__name__)
 app.config.from_object(app_config[os.getenv("FLASK_ENV")])
+app.config.update(
+    TESTING=True,
+    SECRET_KEY=os.getenv("SECRET_KEY")
+)
 
 create_swagger(app)
 mongo.init_app(app)
