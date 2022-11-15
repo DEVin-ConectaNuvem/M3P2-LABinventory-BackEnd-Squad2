@@ -4,10 +4,10 @@ from flask.wrappers import Response
 from src.app import mongo_client
 from bson import json_util
 #from pymongo import ASCENDING, DESCENDING
-from flask import request
+from flask import request, jsonify
 from src.app.utils import set_password, validate_password, generate_jwt
 from datetime import datetime, timedelta, timezone
-from src.app.middlewares.auth import has_logged
+from src.app.middlewares.auth import has_logged, user_exists
 
 users = Blueprint("users", __name__,  url_prefix="/users")
 
@@ -22,18 +22,19 @@ def get_all_users():
   )
 
 @users.route("/", methods=["POST"])
+@user_exists()
 def insert_user():
-    user = request.get_json()
-
-    payload = {
-      "name": user['name'],
-      "email": user["email"],
-      "password": set_password(user["password"])
-    }
-
-    mongo_client.users.insert_one(payload)
-    
-    return {"sucesso": f"User inserido com sucesso"}, 201
+    try:
+        user = request.get_json()
+        payload = {
+          "name": user['name'],
+          "email": user["email"],
+          "password": set_password(user["password"])
+        }
+        mongo_client.users.insert_one(payload)
+        return {"sucesso": f"User inserido com sucesso"}, 201
+    except Exception:
+        return {"error": "Erro ao inserir user"}, 400
     
 @users.route("/", methods=["DELETE"])
 def delete_all():
