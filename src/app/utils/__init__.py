@@ -1,3 +1,4 @@
+import re
 import certifi
 import os
 from pymongo import MongoClient
