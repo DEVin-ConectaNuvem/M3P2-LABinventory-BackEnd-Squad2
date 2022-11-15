@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.config.from_object(app_config[os.getenv("FLASK_ENV")])
 
 create_swagger(app)
-mongo_client = client["netflix"]
+mongo_client = client["devinventory"]
 
 
 create_collection_movies(mongo_client=mongo_client)
