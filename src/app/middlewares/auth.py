@@ -19,6 +19,20 @@ def has_logged():
         return wrapper
     return jwt_required
 
+def has_not_logged():
+    def _has_not_logged(function_current):
+        @wraps(function_current)
+        def __has_not_logged(*args, **kwargs):
+            token = None
+            token = request.headers.get("Authorization")
+            
+            if not token:
+                return function_current(*args, **kwargs)
+            else:
+                return jsonify({"error": "Você já está logado"}), 401
+        return __has_not_logged
+    return _has_not_logged
+
 def user_exists():
     def _user_exists(function_current):
         @wraps(function_current)
@@ -48,7 +62,7 @@ def required_fields(fields: list):
                     
             if not faul:
                 return function_current(*args, **kwargs)
-            return jsonify({"error": f"Faltando campos: {campos}"})
+            return jsonify({"error": f"Faltando campos: {campos}"}), 400
         return __required_fields
     return _required_fields
 

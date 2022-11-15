@@ -7,7 +7,7 @@ from bson import json_util
 from flask import request, jsonify
 from src.app.utils import set_password, validate_password, generate_jwt
 from datetime import datetime, timedelta, timezone
-from src.app.middlewares.auth import has_logged, user_exists, required_fields
+from src.app.middlewares.auth import has_logged, user_exists, required_fields, has_not_logged
 
 users = Blueprint("users", __name__,  url_prefix="/users")
 
@@ -44,6 +44,7 @@ def delete_all():
     return {"sucesso": "Usuários limpos com sucesso"}, 200
 
 @users.route("/login", methods=["POST"])
+@has_not_logged()
 @required_fields(["email", "password"])
 def login_user():
     user_request = request.get_json()
