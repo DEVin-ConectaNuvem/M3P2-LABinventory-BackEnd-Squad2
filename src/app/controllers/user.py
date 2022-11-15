@@ -44,6 +44,7 @@ def delete_all():
     return {"sucesso": "Usuários limpos com sucesso"}, 200
 
 @users.route("/login", methods=["POST"])
+@required_fields(["email", "password"])
 def login_user():
     user_request = request.get_json()
     
