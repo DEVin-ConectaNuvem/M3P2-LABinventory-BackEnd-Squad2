@@ -1,1 +1,10 @@
 .env
+src/app/__pycache__/__init__.cpython-310.pyc
+src/app/controllers/__pycache__/collaborator.cpython-310.pyc
+src/app/controllers/__pycache__/item.cpython-310.pyc
+src/app/models/__pycache__/collaborators.cpython-310.pyc
+src/app/models/__pycache__/items.cpython-310.pyc
+src/app/routes/__pycache__/__init__.cpython-310.pyc
+src/app/__pycache__/__init__.cpython-310.pyc
+src/app/models/__pycache__/items.cpython-310.pyc
+src/app/routes/__pycache__/__init__.cpython-310.pyc
