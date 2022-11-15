@@ -7,10 +7,12 @@ from bson import json_util
 from flask import request
 from src.app.utils import set_password, validate_password, generate_jwt
 from datetime import datetime, timedelta, timezone
+from src.app.middlewares.auth import has_logged
 
 users = Blueprint("users", __name__,  url_prefix="/users")
 
 @users.route("/", methods = ["GET"])
+@has_logged()
 def get_all_users():
     users = mongo_client.users.find()
     return Response(
