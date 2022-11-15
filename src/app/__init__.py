@@ -3,7 +3,7 @@ from flask import Flask
 from src.app.config import app_config
 from src.app.swagger import create_swagger
 from flask_cors import CORS
-from src.app.utils import mongo
+from src.app.utils import mongo_client
 from src.app.models.users import create_collection_users
 from src.app.models.items import create_collection_items
 from src.app.models.collaborators import create_collection_collaborators
@@ -18,7 +18,6 @@ app.config.update(
 )
 
 create_swagger(app)
-mongo_client = mongo["devinventory"]
 
 create_collection_users(mongo_client=mongo_client)
 create_collection_items(mongo_client=mongo_client)
