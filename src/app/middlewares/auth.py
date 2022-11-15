@@ -43,7 +43,7 @@ def user_exists():
 
             if not search:
                 return function_current(*args, **kwargs)
-            return jsonify({"error": f"Usuário {user['email']} já existe."})
+            return jsonify({"error": f"Usuário {user['email']} já existe."}), 401
         return __user_exists
     return _user_exists
 
