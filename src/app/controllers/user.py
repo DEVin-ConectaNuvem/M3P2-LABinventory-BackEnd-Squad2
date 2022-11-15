@@ -8,8 +8,27 @@ from flask import request, jsonify
 from src.app.utils import set_password, validate_password, generate_jwt
 from datetime import datetime, timedelta, timezone
 from src.app.middlewares.auth import has_logged, user_exists, required_fields, has_not_logged
+from flask.globals import session
+from google import auth
+from google.oauth2 import id_token
+from google_auth_oauthlib.flow import Flow
+import os
+import json
+
 
 users = Blueprint("users", __name__,  url_prefix="/users")
+
+os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+
+flow = Flow.from_client_secrets_file(
+    client_secrets_file="src/app/utils/client_secret.json",
+    scopes=[
+        "https://www.googleapis.com/auth/userinfo.email",
+        "https://www.googleapis.com/auth/userinfo.profile",
+        "openid",
+    ],
+    redirect_uri="http://localhost:5000/user/callback",
+)
 
 @users.route("/", methods = ["GET"])
 @has_logged()
@@ -68,3 +87,13 @@ def login_user():
         return {"error": f"{e}"}
 
 
+@users.route("/auth/google", methods=["POST"])
+def auth_google():
+    authorization_url, state = flow.authorization_url()
+    session["state"] = state
+
+    return Response(
+          response=json.dumps({"url": authorization_url}),
+          status=200,
+          mimetype="application/json",
+        )
