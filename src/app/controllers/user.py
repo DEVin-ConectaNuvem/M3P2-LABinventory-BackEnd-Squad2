@@ -5,7 +5,7 @@ from src.app import mongo_client
 from bson import json_util
 #from pymongo import ASCENDING, DESCENDING
 from flask import request, jsonify
-from src.app.utils import set_password, validate_password, generate_jwt
+from src.app.utils import set_password, validate_password, generate_jwt, check_valid_email
 from datetime import datetime, timedelta, timezone
 from src.app.middlewares.auth import has_logged, user_exists, required_fields, has_not_logged
 
@@ -21,21 +21,29 @@ def get_all_users():
     mimetype="application/json"
   )
 
-@users.route("/", methods=["POST"])
+@users.route("/create", methods=["POST"])
 @required_fields(["name", "email", "password"])
 @user_exists()
 def insert_user():
     try:
         user = request.get_json()
-        payload = {
-          "name": user['name'],
-          "email": user["email"],
-          "password": set_password(user["password"])
-        }
-        mongo_client.users.insert_one(payload)
-        return {"sucesso": f"User inserido com sucesso"}, 201
-    except Exception:
-        return {"error": f"Erro ao inserir user: Faltando campo obrigatório"}, 400
+        if check_valid_email(user["email"]) and len(user["password"]) >= 8:
+            payload = {
+                "name": user['name'],
+                "email": user["email"],
+                "password": set_password(user["password"])
+            }
+
+            mongo_client.users.insert_one(payload)
+            return {"sucesso": f"User inserido com sucesso"}, 201
+        else:
+            if not check_valid_email(user["email"]):
+                return {"error": "O email não é valido"}, 400
+            if len(user["password"]) < 8:
+                return {"error": "A senha deve ser maior que 8 dígitos"}, 400
+    except Exception as exp:
+        print(exp.args)
+        return {"error": "Document failed validation"}, 400
     
 @users.route("/", methods=["DELETE"])
 def delete_all():
