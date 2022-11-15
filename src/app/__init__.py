@@ -8,15 +8,17 @@ from src.app.models.users import create_collection_users
 from src.app.models.items import create_collection_items
 from src.app.models.collaborators import create_collection_collaborators
 #from src.app.models.comments import create_collection_comments
-#DB = mongo(url=os.getenv("MONGO_URI"))
+
 
 app = Flask(__name__)
 app.config.from_object(app_config[os.getenv("FLASK_ENV")])
+app.config.update(
+    TESTING=True,
+    SECRET_KEY=os.getenv("SECRET_KEY")
+)
 
 create_swagger(app)
-mongo.init_app(app)
-mongo_client = mongo.cx.get_database("devinventory")
-
+mongo_client = mongo["devinventory"]
 
 create_collection_users(mongo_client=mongo_client)
 create_collection_items(mongo_client=mongo_client)

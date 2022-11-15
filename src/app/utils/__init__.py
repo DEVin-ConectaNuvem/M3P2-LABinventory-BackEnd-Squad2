@@ -1,10 +1,11 @@
-import re
-from flask_pymongo import PyMongo
+import certifi
+import os
+from pymongo import MongoClient
 from jwt import encode
 from flask import current_app
 from werkzeug.security import check_password_hash, generate_password_hash
 
-mongo = PyMongo()
+mongo = client = MongoClient(os.getenv("MONGO_URI"), tls=True, tlsCAFile=certifi.where())
 
 def generate_jwt(payload):
     token = encode(payload, current_app.config["SECRET_KEY"], "HS256")
