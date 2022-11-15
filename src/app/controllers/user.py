@@ -7,7 +7,7 @@ from bson import json_util
 from flask import request, jsonify
 from src.app.utils import set_password, validate_password, generate_jwt
 from datetime import datetime, timedelta, timezone
-from src.app.middlewares.auth import has_logged, user_exists
+from src.app.middlewares.auth import has_logged, user_exists, required_fields
 
 users = Blueprint("users", __name__,  url_prefix="/users")
 
@@ -22,6 +22,7 @@ def get_all_users():
   )
 
 @users.route("/", methods=["POST"])
+@required_fields(["name", "email", "password"])
 @user_exists()
 def insert_user():
     try:
@@ -34,7 +35,7 @@ def insert_user():
         mongo_client.users.insert_one(payload)
         return {"sucesso": f"User inserido com sucesso"}, 201
     except Exception:
-        return {"error": "Erro ao inserir user"}, 400
+        return {"error": f"Erro ao inserir user: Faltando campo obrigatório"}, 400
     
 @users.route("/", methods=["DELETE"])
 def delete_all():

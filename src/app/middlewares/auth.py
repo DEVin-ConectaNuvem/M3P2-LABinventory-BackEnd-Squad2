@@ -33,3 +33,22 @@ def user_exists():
         return __user_exists
     return _user_exists
 
+def required_fields(fields: list):
+    def _required_fields(function_current):
+        @wraps(function_current)
+        def __required_fields(*args, **kwargs):
+            body = request.get_json()
+
+            faul = False
+            campos = []
+            for field in fields:
+                if not field in body:
+                    faul = True
+                    campos.append(field)
+                    
+            if not faul:
+                return function_current(*args, **kwargs)
+            return jsonify({"error": f"Faltando campos: {campos}"})
+        return __required_fields
+    return _required_fields
+
