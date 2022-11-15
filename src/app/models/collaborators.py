@@ -2,7 +2,7 @@ def create_collection_collaborators(mongo_client):
     collaborators_validator = {
         "$jsonSchema": {
             "bsonType": "object",
-            "required": ["_id","nome", "genero", "nascimento", "telefone", "bairro", "cargo", "cep", "email", "localidade", "logradouro", "uf"],
+            "required": ["nome", "genero", "nascimento", "telefone", "bairro", "cargo", "cep", "email", "localidade", "logradouro", "uf"],
             "properties": {
                 "_id": {
                   "bsonType": "objectId",
@@ -53,7 +53,7 @@ def create_collection_collaborators(mongo_client):
                   "description": "Rua onde mora"
                 },
                 "numero": {
-                  "bsonType": "integer",
+                  "bsonType": "int",
                   "description": "Número da residencia"
                 },
                 "referencia": {
