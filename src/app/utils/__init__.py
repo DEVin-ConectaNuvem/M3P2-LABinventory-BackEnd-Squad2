@@ -1,3 +1,6 @@
-from flask_pymongo import PyMongo
+import os
+import certifi
+from pymongo import MongoClient
 
-mongo = PyMongo()
+
+client = MongoClient(os.getenv("MONGO_URI"), tls=True, tlsCAFile=certifi.where())
