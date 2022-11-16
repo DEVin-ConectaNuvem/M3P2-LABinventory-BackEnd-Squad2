@@ -1,3 +1,4 @@
+import re
 import certifi
 import os
 from pymongo import MongoClient
@@ -17,3 +18,11 @@ def set_password(password):
 
 def validate_password(password_hash, password):
     return check_password_hash(password_hash, password)
+
+
+def check_valid_email(email):
+    regex_email = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+    if (re.fullmatch(regex_email, email)):
+        return True
+    else:
+        return False
