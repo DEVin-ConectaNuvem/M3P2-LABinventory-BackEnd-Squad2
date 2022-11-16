@@ -12,7 +12,7 @@ items = Blueprint("items", __name__,  url_prefix="/items")
 def get_all_items():
     title = request.args.get('title')
     if title:
-        list_items_per_title = mongo_client.collabs.find({"nome": { "$regex": title}})
+        list_items_per_title = mongo_client.items.find({"titulo": { "$regex": title}})
         if not list_items_per_title:
             error = {
                 "Error": "Item não encontrado."
