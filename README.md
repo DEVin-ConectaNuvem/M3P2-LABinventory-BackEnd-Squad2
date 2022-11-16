@@ -42,16 +42,20 @@ Executar o comando: <i>poetry run flask run</i>
 
 <b>INVENTORY</b>
 
-<b style="font-size:30px">POST/inventory/</b>
-<b style="font-size:30px">GET/inventory</b>
-<b style="font-size:30px">GET/inventory/results</b> 
-<b style="font-size:30px">PATCH/inventory</b>
+<ul>
+<li><b style="font-size:30px">POST/inventory/</b></li>
+<li><b style="font-size:30px">GET/inventory</b></li>
+<li><b style="font-size:30px">GET/inventory/results</b></li>
+<li><b style="font-size:30px">PATCH/inventory</b></li>
+</ul>
 
 <b>USERS</b>
 
-<b style="font-size:30px">POST/user/</b>
-<b style="font-size:30px">PATCH/user/id</b>
-<b style="font-size:30px">GET/user</b>
+<ul>
+<li><b style="font-size:30px">POST/user/</b></li>
+<li><b style="font-size:30px">PATCH/user/id</b></li>
+<li><b style="font-size:30px">GET/user</b></li>
+</ul>
 
 # Tecnologias utilizadas:
 
