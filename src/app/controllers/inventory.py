@@ -35,7 +35,7 @@ def get_all_collabs():
     indexInicial = responseValorItems.index(':')+2
     indexFinal = len(responseValorItems)-2
     result['Valor_Items'] = round(float(responseValorItems[indexInicial:indexFinal]),2)
-    emprestimos = mongo_client.items.count_documents({'emprestado' :{'$ne': ''}})
+    emprestimos = mongo_client.items.count_documents({'emprestado' :{'$ne': 'Item disponível'}})
     responseEmprestimos=json_util.dumps(emprestimos)
     result['Num_Emprestimos'] = int(responseEmprestimos)
     resultFinal = json_util.dumps(result)
