@@ -1,4 +1,5 @@
-from flask import Blueprint, request
+
+from flask import Blueprint, request, jsonify
 from flask.wrappers import Response
 from src.app import mongo_client
 from bson import json_util
@@ -11,6 +12,20 @@ items = Blueprint("items", __name__,  url_prefix="/items")
 
 @items.route("/", methods = ["GET"])
 def get_all_items():
+    title = request.args.get('title')
+    if title:
+        list_items_per_title = mongo_client.items.find({"titulo": { "$regex": title}})
+        if not list_items_per_title:
+            error = {
+                "Error": "Item não encontrado."
+            }
+            return jsonify(error), 204
+
+        return Response(
+            response=json_util.dumps({"records": list_items_per_title}),
+            status=200,
+            mimetype="application/json")
+
     items = mongo_client.items.find()
     return Response(
     response=json_util.dumps({'records' : items}),
