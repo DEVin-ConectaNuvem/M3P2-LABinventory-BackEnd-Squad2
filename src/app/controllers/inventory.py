@@ -11,7 +11,7 @@ inventors = Blueprint("inventors", __name__,  url_prefix="/inventory")
 
 @inventors.route("/analytics", methods = ["GET"])
 @has_logged()
-def get_all_collabs():
+def get_analytics():
     result = dict()
     collabs = mongo_client.collabs.count_documents({})
     responseCollabs=json_util.dumps(collabs)
