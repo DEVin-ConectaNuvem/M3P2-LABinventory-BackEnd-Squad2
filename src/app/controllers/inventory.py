@@ -5,10 +5,12 @@ from src.app import mongo_client
 from bson import json_util
 from pymongo import ASCENDING, DESCENDING
 from flask import request, jsonify
+from src.app.middlewares.auth import required_fields, has_logged
 
 inventors = Blueprint("inventors", __name__,  url_prefix="/inventory")
 
 @inventors.route("/analytics", methods = ["GET"])
+@has_logged()
 def get_all_collabs():
     result = dict()
     collabs = mongo_client.collabs.count_documents({})

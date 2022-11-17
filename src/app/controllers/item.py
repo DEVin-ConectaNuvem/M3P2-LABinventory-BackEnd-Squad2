@@ -11,6 +11,7 @@ from src.app.middlewares.items import item_exists
 items = Blueprint("items", __name__,  url_prefix="/items")
 
 @items.route("/", methods = ["GET"])
+@has_logged()
 def get_all_items():
     title = request.args.get('title')
     if title:
@@ -47,6 +48,7 @@ def insert_item():
     return {"sucesso": "Item cadstrado com sucesso"}, 201
     
 @items.route("/", methods=["DELETE"])
+@has_logged()
 def delete_all():
     mongo_client.items.delete_many({})
 

@@ -67,6 +67,7 @@ def insert_user():
         return {"error": "Document failed validation"}, 400
     
 @users.route("/", methods=["DELETE"])
+@has_logged()
 def delete_all():
     mongo_client.users.delete_many({})
 

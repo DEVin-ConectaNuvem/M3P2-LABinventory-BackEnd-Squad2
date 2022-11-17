@@ -48,6 +48,7 @@ def insert_collabs():
       return {"erro": "Algo deu errado..."}, 500
     
 @collabs.route("/", methods=["DELETE"])
+@has_logged()
 def delete_all():
     mongo_client.collabs.delete_many({})
 
