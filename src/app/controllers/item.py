@@ -53,3 +53,13 @@ def delete_all():
     mongo_client.items.delete_many({})
 
     return {"sucesso": "Items limpos com sucesso"}, 200
+
+@items.route("/edit", methods=["PATCH"])
+@has_logged()
+def edit():
+    request_params = request.get_json()
+    pat = request.json.get("patrimonio")
+    pat_call = {"patrimonio" : pat}
+    mongo_client.items.update_one(pat_call, {'$set':request_params})
+
+    return {"sucesso": "Item alterado com sucesso"}, 204
