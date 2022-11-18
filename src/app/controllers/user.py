@@ -92,7 +92,11 @@ def login_user():
         }
         token = generate_jwt(payload)
 
-        return {"token": token, "status_code": 200}
+        return {
+            "token": token,
+            "name": user['name'],
+            "email": user['email'], 
+            "status_code": 200}, 200
 
     except Exception as e:
         return {"error": f"{e}"}
@@ -141,4 +145,4 @@ def callback():
 
     token = generate_jwt(user_google_dict)
 
-    return redirect(f"{current_app.config['FRONTEND_URL']}?jwt={token}")
+    return redirect(f"{current_app.config['FRONTEND_URL']}#/users/{token}/{name}")
