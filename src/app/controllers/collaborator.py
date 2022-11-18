@@ -54,6 +54,13 @@ def delete_all():
 
     return {"sucesso": "Colaboradores DB limpos com sucesso"}, 204
 
+@collabs.route("/<int:id>", methods=["DELETE"])
+# @has_logged()
+def delete_collab(id):
+    mongo_client.collabs.delete_one({'id':id})
+
+    return {"sucesso": "Colaborador excluido com sucesso"}, 204
+
 @collabs.route("/edit", methods=["PATCH"])
 @has_logged()
 def edit():
