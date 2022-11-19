@@ -1,5 +1,3 @@
-from flask import json
-
 def test_get_all_employees_not_logged(client):
     response = client.get('collabs/')
     
@@ -29,9 +27,6 @@ def test_get_specific_employee_not_found(client, logged_in_client):
 
 
 def test_get_specific_employee_return_correct_fields(client, logged_in_client):
-
-    keys = ["_id", "nome", "genero"]
-
     data = {
         "records": [
             {
