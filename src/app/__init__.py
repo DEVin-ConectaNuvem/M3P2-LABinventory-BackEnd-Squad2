@@ -30,7 +30,7 @@ def create_app(environment):
     create_collection_items(mongo_client=mongo_client)
     create_collection_collaborators(mongo_client=mongo_client)
     
-    return {"app": app, "mongo_client": mongo_client}
+    return app
 #create_collection_comments(mongo_client=mongo_client)
 
 

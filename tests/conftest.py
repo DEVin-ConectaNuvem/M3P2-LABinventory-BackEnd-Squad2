@@ -12,7 +12,7 @@ headers = {
 
 @pytest.fixture(scope="session")
 def app():
-    app_on = create_app('testing')['app']
+    app_on = create_app('testing')
     routes(app_on)
     return app_on
 
