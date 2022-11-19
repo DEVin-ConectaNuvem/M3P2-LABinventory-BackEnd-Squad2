@@ -303,8 +303,8 @@ optional = false
 python-versions = ">=3.6"
 
 [package.extras]
-dev = ["pre-commit", "tox"]
-testing = ["pytest", "pytest-benchmark"]
+testing = ["pytest-benchmark", "pytest"]
+dev = ["tox", "pre-commit"]
 
 [[package]]
 name = "py"
@@ -440,7 +440,7 @@ testing = ["fields", "hunter", "process-tests", "six", "pytest-xdist", "virtuale
 name = "pytest-flask"
 version = "1.2.0"
 description = "A set of py.test fixtures to test Flask applications."
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.5"
 
@@ -577,7 +577,7 @@ watchdog = ["watchdog"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "00ca91d07a15f5e0cf1b0e028b962c0573a67ecfc1ea3c39093a5cedbeda4d21"
+content-hash = "4c0d93910895b9ece2734ec958ba3e93db7e022619e51b8a1b62fe36081190d0"
 
 [metadata.files]
 atomicwrites = [
