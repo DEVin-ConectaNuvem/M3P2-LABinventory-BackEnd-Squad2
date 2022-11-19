@@ -22,6 +22,7 @@ google-auth = "^2.14.1"
 [tool.poetry.dev-dependencies]
 pytest = "^6.2"
 pytest-flask = "^1.2.0"
+pytest-cov = "^4.0.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
