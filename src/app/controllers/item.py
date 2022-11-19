@@ -67,7 +67,7 @@ def edit_item():
                         "patrimonio": item_novo['patrimonio'],
                         "titulo": item_novo['titulo'],
                         "categoria": item_novo['categoria'],
-                        "valor": item_novo['valor'],
+                        "valor": float(item_novo['valor']),
                         "url": item_novo['url'],
                         "marca": item_novo['marca'],
                         "modelo": item_novo['modelo'],
