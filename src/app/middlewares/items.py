@@ -12,6 +12,6 @@ def item_exists():
 
             if not search:
                 return function_current(*args, **kwargs)
-            return jsonify({"error": f"Já existe um item cadastrado com o patrimônio {item['patrimonio']}."}), 401
+            return jsonify({"error": f"Já existe um item cadastrado com o patrimônio {item['patrimonio']}."}), 400
         return __item_exists
     return _item_exists
