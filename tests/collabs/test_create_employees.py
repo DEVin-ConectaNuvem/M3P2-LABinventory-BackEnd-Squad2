@@ -22,7 +22,7 @@ def test_create_employee_failed_not_logged(client):
         "uf": "SP"
     }
 
-    response = client.post("collabs/cadastro", data=json.dumps(data), headers={
+    response = client.post("collabs/", data=json.dumps(data), headers={
         "Content-Type": "application/json",
         "Accept": "application/json"
     })
@@ -50,7 +50,7 @@ def test_create_employee_success(client, logged_in_client):
         "uf": "SP"
     }
 
-    response = client.post("collabs/cadastro", data=json.dumps(data), headers={
+    response = client.post("collabs/", data=json.dumps(data), headers={
         "Content-Type": "application/json",
         "Accept": "application/json",
         "Authorization": f"Bearer {logged_in_client}"
@@ -79,7 +79,7 @@ def test_create_employee_failed_already_exists(client, logged_in_client):
         "uf": "SP"
     }
 
-    response = client.post("collabs/cadastro", data=json.dumps(data), headers={
+    response = client.post("collabs/", data=json.dumps(data), headers={
         "Content-Type": "application/json",
         "Accept": "application/json",
         "Authorization": f"Bearer {logged_in_client}"
@@ -113,7 +113,7 @@ def test_create_employee_failed_missing_field(client, logged_in_client):
 
     del data[keys_not_have_in_request]
 
-    response = client.post("collabs/cadastro", data=json.dumps(data), headers={
+    response = client.post("collabs/", data=json.dumps(data), headers={
         "Content-Type": "application/json",
         "Accept": "application/json",
         "Authorization": f"Bearer {logged_in_client}"
