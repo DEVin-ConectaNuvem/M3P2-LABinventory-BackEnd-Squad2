@@ -34,25 +34,31 @@ def get_all_items():
     mimetype="application/json"
   )
 
-@items.route("/create", methods=["POST"])
+@items.route("/", methods=["POST"])
 @has_logged()
 @required_fields(["patrimonio", "titulo", "categoria", "valor", "marca", "modelo", "descricao", "url"])
 @item_exists()
 def insert_item():
     item = request.get_json()
 
-    item['emprestado'] = "Item disponível"
-
+    # item['emprestado'] = "Item disponível"
+    
+    # item['valor'].replace(",", ".")
     mongo_client.items.insert_one(item)
 
     return {"sucesso": "Item cadstrado com sucesso"}, 201
     
-@items.route("/", methods=["DELETE"])
+@items.route("/<patr>", methods=["DELETE"])
 @has_logged()
-def delete_all():
-    mongo_client.items.delete_many({})
-
-    return {"sucesso": "Items limpos com sucesso"}, 200
+def delete_item(patr):
+    print('DELETE')
+    try:
+        title = request.args.get('patr')
+        print(title)
+        mongo_client.items.delete_one({'patrimonio': patr})
+        return {"sucesso": "Item deletado com sucesso"}, 200
+    except Exception:
+        return {"error": "Algo deu errado."}, 500
 
 @items.route("/", methods=["PATCH"])
 @has_logged()
@@ -67,7 +73,7 @@ def edit_item():
                         "patrimonio": item_novo['patrimonio'],
                         "titulo": item_novo['titulo'],
                         "categoria": item_novo['categoria'],
-                        "valor": float(item_novo['valor']),
+                        "valor": item_novo['valor'],
                         "url": item_novo['url'],
                         "marca": item_novo['marca'],
                         "modelo": item_novo['modelo'],
