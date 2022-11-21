@@ -1,7 +1,7 @@
 from flask import Blueprint
 from flask.wrappers import Response
 from src.app import mongo_client
-from bson import json_util
+from bson import json_util, ObjectId
 from flask import request, jsonify
 from src.app.middlewares.auth import required_fields, has_logged
 from src.app.middlewares.collabs import collab_exists
@@ -33,7 +33,22 @@ def get_all_collabs():
     mimetype="application/json"
   )
 
-@collabs.route("/cadastro", methods=["POST"])
+@collabs.route("/collab/", methods = ["GET"])
+@has_logged()
+def get_one_collab():
+    try:
+        collab_id = request.args.get("_id")
+        collab = mongo_client.collabs.find_one({"_id": ObjectId(collab_id)})
+        return Response(
+        response=json_util.dumps({'records' : collab}),
+        status=200,
+        mimetype="application/json"
+    )
+    except Exception:
+      return {"error": "Colaborador não cadastrado."}, 404
+
+
+@collabs.route("/", methods=["POST"])
 @has_logged()
 @required_fields(['nome', 'genero', 'nascimento', 'telefone', 'bairro', 'cargo', 'cep', 'email', 'localidade', 'logradouro', 'numero', 'uf'])
 @collab_exists()
@@ -54,19 +69,26 @@ def delete_all():
 
     return {"sucesso": "Colaboradores DB limpos com sucesso"}, 204
 
-@collabs.route("/<int:id>", methods=["DELETE"])
+@collabs.route("/collab/", methods=["DELETE"])
 @has_logged()
-def delete_collab(id):
-    mongo_client.collabs.delete_one({'id':id})
+def delete_collab():
+    try:
+        collab_id = request.args.get("_id")
+        mongo_client.collabs.delete_one({'_id': ObjectId(collab_id)})
+        return {"sucesso": "Colaborador excluido com sucesso"}, 204
+    except:
+        return {"error": "Algo deu errado."}, 500
 
-    return {"sucesso": "Colaborador excluido com sucesso"}, 204
-
-@collabs.route("/edit", methods=["PATCH"])
+@collabs.route("/edit/", methods=['PUT'])
 @has_logged()
-def edit():
-    request_params = request.get_json()
-    id = request.json.get("id")
-    id_call = {"id" : id}
-    mongo_client.collabs.update_one(id_call, {'$set':request_params})
+def edit_collab():
+    try:
+        collab_id = request.args.get("_id")
+        request_params = request.get_json()
+        request_params.pop("_id")
+        id_call = {"_id" : ObjectId(collab_id)}
+        mongo_client.collabs.update_one(id_call, {'$set':request_params})
 
-    return {"sucesso": "Colaborador alterado com sucesso"}, 204
+        return {"sucesso": "Colaborador alterado com sucesso"}, 204
+    except Exception:
+        return {"error": "Algo deu errado."}, 500
