@@ -21,7 +21,7 @@ def create_collection_items(mongo_client):
                   "description": "Categoria do item"
                 },
                 "valor": {
-                  "bsonType": "double",
+                  "bsonType": "number",
                   "description": "Valor em reais",
                 },
                 "url": {

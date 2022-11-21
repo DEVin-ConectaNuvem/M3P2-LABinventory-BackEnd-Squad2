@@ -9,7 +9,7 @@ from src.app.models.items import create_collection_items
 from src.app.models.collaborators import create_collection_collaborators
 #from src.app.models.comments import create_collection_comments
 
-mongo_client = mongo["devinventory"]
+mongo_client = mongo[os.getenv('MONGO_DATABASE')]
 
 def create_app(environment):
 
@@ -25,7 +25,7 @@ def create_app(environment):
     db = {"development": "devinventory", "testing": "devinventory-test", "production": "devinventory-prod", "homologation": "devinventory-homo"}
     
     mongo_client = mongo[db[environment]]
-
+    
     create_collection_users(mongo_client=mongo_client)
     create_collection_items(mongo_client=mongo_client)
     create_collection_collaborators(mongo_client=mongo_client)

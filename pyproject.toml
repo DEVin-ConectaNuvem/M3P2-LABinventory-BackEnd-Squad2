@@ -5,7 +5,7 @@ description = ""
 authors = ["mayconrcampos <maycon.campos@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.8"
 Flask = "^2.2.2"
 python-dotenv = "^0.21.0"
 flasgger = "^0.9.5"
@@ -18,10 +18,13 @@ pymongo = "^4.3.2"
 pydantic = "^1.10.2"
 google-auth-oauthlib = "^0.7.1"
 google-auth = "^2.14.1"
+pytest-flask = "^1.2.0"
+pytest-cov = "^4.0.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2"
 pytest-flask = "^1.2.0"
+pytest-cov = "^4.0.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

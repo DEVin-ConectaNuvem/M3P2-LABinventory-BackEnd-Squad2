@@ -4,7 +4,6 @@ from src.app import create_app
 from src.app.routes import routes
 from flask import json
 
-
 mimetype = 'application/json'
 headers = {
     'Content-Type': mimetype,
