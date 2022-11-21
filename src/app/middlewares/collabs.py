@@ -12,6 +12,6 @@ def collab_exists():
 
             if not search:
                 return function_current(*args, **kwargs)
-            return jsonify({"error": f"Colaborador com email {collab['email']} já existe."}), 401
+            return jsonify({"error": f"Colaborador com email {collab['email']} já existe."}), 400
         return __collab_exists
     return _collab_exists
