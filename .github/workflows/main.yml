@@ -1,4 +1,4 @@
-name: DEVinventary
+name: LABinventary
 
 on:
   push:
