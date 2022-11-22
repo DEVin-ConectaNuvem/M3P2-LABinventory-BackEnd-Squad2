@@ -81,4 +81,4 @@ def test_user_login_failed_missing_fields(client):
     })
 
     assert response.status_code == 400
-    assert response.json["error"] == "Faltando campos: ['password']"
+    assert f"Faltando campos: ['{keys_not_have_in_request}']" in response.json["error"]
