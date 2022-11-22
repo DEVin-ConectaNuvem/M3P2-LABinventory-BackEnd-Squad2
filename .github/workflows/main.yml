@@ -2,7 +2,7 @@ name: DEVinventary
 
 on:
   push:
-    branches: [ main, Dev ]
+    branches: [ main, dev ]
 
 jobs:
 
