@@ -8,13 +8,11 @@ Utilizando o projeto Back-end desenvolvido durante o Módulo 3, consiste no dese
 
 <ul>
   <li><i>Utilizar Python</i> </li>
-  <li><i>Utilizar Flask com SQLAlchemy.</i> </li>
-  <li><i>Utilizar banco de dados Mongo DB para armazenar os dados.</i> </li>
-  <li><i>Utilizar conceito de Migrations.</i> </li>
+  <li><i>Utilizar Flask</i> </li>
+  <li><i>Utilizar banco de dados Mongo DB para armazenar os dados, e conhecimentos em NoSQL.</i> </li>
   <li><i>Utilizar GitHub para armazenamento do código</i> </li>
   <li><i>Utilizar Trello para organização do projeto</i> </li>
   <li><i>Utilizar Pytest para os testes unitários</i> </li>
-  <li><i>Utilizar conhecimentos em SQL</i></li>
 </ul>
 
 # Pré requisitos ambiente:
