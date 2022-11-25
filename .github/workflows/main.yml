@@ -1,4 +1,4 @@
-name: LABinventary
+name: CI-LABinventary
 
 on:
   push:
