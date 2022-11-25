@@ -1,8 +1,8 @@
-name: DEVinventary
+name: LABinventary
 
 on:
   push:
-    branches: [ main, Dev ]
+    branches: [ main, dev ]
 
 jobs:
 

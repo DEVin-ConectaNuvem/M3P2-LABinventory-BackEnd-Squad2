@@ -1,21 +1,21 @@
+import os
+import json
+import requests
 
+from bson import json_util
 from flask import Blueprint
 from flask.wrappers import Response
-from src.app import mongo_client
-from bson import json_util
-#from pymongo import ASCENDING, DESCENDING
 from flask import request, jsonify, current_app
-from src.app.utils import set_password, validate_password, generate_jwt, check_valid_email
-from datetime import datetime, timedelta, timezone
-from src.app.middlewares.auth import has_logged, user_exists, required_fields, has_not_logged
 from flask.globals import session
 from google import auth
 from google.oauth2 import id_token
 from google_auth_oauthlib.flow import Flow
-import os
-import json
 from werkzeug.utils import redirect
-import requests
+from datetime import datetime, timedelta, timezone
+
+from src.app import mongo_client
+from src.app.utils import set_password, validate_password, generate_jwt, check_valid_email
+from src.app.middlewares.auth import has_logged, user_exists, required_fields, has_not_logged
 
 
 users = Blueprint("users", __name__,  url_prefix="/users")
@@ -32,6 +32,7 @@ flow = Flow.from_client_secrets_file(
     redirect_uri="http://localhost:5000/users/callback",
 )
 
+
 @users.route("/", methods = ["GET"])
 @has_logged()
 def get_all_users():
@@ -41,6 +42,7 @@ def get_all_users():
     status=200,
     mimetype="application/json"
   )
+
 
 @users.route("/create", methods=["POST"])
 @required_fields(["name", "email", "password"])
@@ -66,12 +68,14 @@ def insert_user():
         print(exp.args)
         return {"error": "Document failed validation"}, 400
     
+
 @users.route("/", methods=["DELETE"])
 @has_logged()
 def delete_all():
     mongo_client.users.delete_many({})
 
     return {"sucesso": "Usuários limpos com sucesso"}, 200
+
 
 @users.route("/login", methods=["POST"])
 @has_not_logged()
@@ -103,6 +107,7 @@ def login_user():
 
 
 @users.route("/auth/google", methods=["POST"])
+@has_not_logged()
 def auth_google():
     authorization_url, state = flow.authorization_url()
     session["state"] = state
@@ -111,7 +116,7 @@ def auth_google():
           response=json.dumps({"url": authorization_url}),
           status=200,
           mimetype="application/json",
-        )
+    )
 
 
 @users.route("/callback", methods=["GET"])
@@ -138,7 +143,6 @@ def callback():
         }
         user = mongo_client.users.insert_one(new_user)
     
-    #user_google_dict["roles"] = ["READ", "WRITE"]
     session["google_id"] = user_google_dict.get("sub")
     del user_google_dict["aud"]
     del user_google_dict["azp"]
