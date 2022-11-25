@@ -52,7 +52,6 @@ def insert_item():
 @has_logged()
 def delete_item(patr):
     try:
-        title = request.args.get('patr')
         mongo_client.items.delete_one({'patrimonio': patr})
         return {"sucesso": "Item deletado com sucesso"}, 200
     except Exception:
