@@ -41,12 +41,19 @@ def get_all_items():
 def insert_item():
     item = request.get_json()
 
+    if(float(item["valor"])<=0.0):
+        return {"error": "Valor tem que ser maior que zero"}, 400
+
     # item['emprestado'] = "Item disponível"
     
     # item['valor'].replace(",", ".")
-    mongo_client.items.insert_one(item)
+    elif(float(item["valor"])>0):
+        mongo_client.items.insert_one(item)
 
-    return {"sucesso": "Item cadstrado com sucesso"}, 201
+        return {"sucesso": "Item cadstrado com sucesso"}, 201
+    else:
+        return {"error": "Erro ao cadastrar item"}, 400
+    
     
 @items.route("/<patr>", methods=["DELETE"])
 @has_logged()
