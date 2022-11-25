@@ -33,4 +33,4 @@ def test_oauth_login_success_open_google_url(client):
     response = requests.get(oauth_url)
 
     assert response.status_code == 200
-    assert "Fazer login usando sua Conta do Google" in response.text
+    assert "Sign in - Google Accounts" or "Fazer login usando sua Conta do Google" in response.text
