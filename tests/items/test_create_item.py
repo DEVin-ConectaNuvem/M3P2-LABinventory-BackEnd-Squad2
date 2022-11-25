@@ -86,7 +86,6 @@ def test_create_item_failed_missing_field(client, logged_in_client):
     assert f"Faltando campos: ['{keys_not_have_in_request}']" in response.json["error"]
 
 
-""" Aguardando criar a validação do campo valor ao criar item
 def test_create_item_failed_wrong_value(client, logged_in_client):
     data = { 
         "patrimonio": "XY6532-999",
@@ -107,5 +106,4 @@ def test_create_item_failed_wrong_value(client, logged_in_client):
     })
     
     assert response.status_code == 400
-    assert response.json['error'] == "O campo value não pode ser menor ou igual a zero"
- """
+    assert response.json['error'] == "Valor tem que ser maior que zero"
