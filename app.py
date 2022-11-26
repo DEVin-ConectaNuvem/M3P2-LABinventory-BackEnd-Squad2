@@ -7,4 +7,4 @@ app = create_app(os.getenv('FLASK_ENV'))
 routes(app)
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 8080)))
