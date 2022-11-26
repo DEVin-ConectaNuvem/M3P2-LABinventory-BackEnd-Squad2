@@ -1,12 +1,12 @@
 FROM python:3.8.13-alpine
 
-ENV PORT 5000
+ENV PORT 8080
 
 WORKDIR /app
 
 COPY . .
 
-EXPOSE 5000
+EXPOSE 8080
 
 RUN pip3 install -r requirements.txt
 
