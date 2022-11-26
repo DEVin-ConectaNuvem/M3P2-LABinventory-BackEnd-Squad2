@@ -47,4 +47,6 @@ jobs:
         run: docker push $IMAGE_NAME
       
       - name : Deploy Docker Image
-        run: gcloud run deploy labinventory-backend --image $IMAGE_NAME --region us-central1
+        run: gcloud run deploy labinventory-backend \
+             --image $IMAGE_NAME --region us-central1 \
+             --allow-unauthenticated
