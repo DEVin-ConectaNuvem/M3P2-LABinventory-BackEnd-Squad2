@@ -15,7 +15,9 @@ env:
   OAUTHLIB_INSECURE_TRANSPORT: ${{ secrets.OAUTHLIB_INSECURE_TRANSPORT }}
   FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
   BACKEND_URL: ${{ secrets.BACKEND_URL }}
-  PORT: 8080
+  FLASK_RUN_PORT: ${{ secrets.FLASK_RUN_PORT }}
+  FLASK_RUN_HOST: ${{ secrets.FLASK_RUN_HOST }}
+  PORT: ${{ secrets.FLASK_RUN_PORT }}
 
 
 jobs:
@@ -47,4 +49,4 @@ jobs:
         run: docker push $IMAGE_NAME
       
       - name : Deploy Docker Image
-        run: gcloud run deploy labinventory-backend --image $IMAGE_NAME --region us-central1 --allow-unauthenticated --platform managed
+        run: gcloud run deploy labinventory-backend --image $IMAGE_NAME --region us-central1 --allow-unauthenticated --platform managed --args="PORT=8080"
