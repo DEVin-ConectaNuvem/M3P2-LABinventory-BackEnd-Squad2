@@ -1,8 +1,5 @@
 FROM python:3.8.13-alpine
 
-ENV PORT 8080
-ENV HOST 0.0.0.0
-
 WORKDIR /app
 
 COPY . .
