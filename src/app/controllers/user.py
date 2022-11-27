@@ -29,7 +29,7 @@ flow = Flow.from_client_secrets_file(
         "https://www.googleapis.com/auth/userinfo.profile",
         "openid",
     ],
-    redirect_uri="http://localhost:5000/users/callback",
+    redirect_uri=f"{current_app.config['BACKEND_URL']}#/users/callback"
 )
 
 
