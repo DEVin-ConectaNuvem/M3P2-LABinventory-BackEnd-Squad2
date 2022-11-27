@@ -28,6 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       IMAGE_NAME: gcr.io/${{ secrets.GCP_PROJECT_ID }}/labinventory:latest
+      DOCKER_DEFAULT_PLATFORM: linux/amd64
 
     steps:
       - name: Git Checkout
@@ -43,7 +44,7 @@ jobs:
         run: gcloud auth configure-docker --quiet
 
       - name: Docker Build Image
-        run: docker build -t $IMAGE_NAME .
+        run: DOCKER_DEFAULT_PLATFORM=linux/amd64 docker build -t $IMAGE_NAME .
       
       - name: Push Docker Image
         run: docker push $IMAGE_NAME
