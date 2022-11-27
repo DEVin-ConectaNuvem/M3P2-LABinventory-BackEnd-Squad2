@@ -14,7 +14,6 @@ def has_logged():
                 token = request.headers.get("Authorization")
                 if not token:
                     return jsonify({"error": "Você não está logado"}), 403
-
                 token_pure = token.replace("Bearer ", "")
                 decoded = decode(token_pure, current_app.config["SECRET_KEY"], "HS256")
                 if datetime.now() > datetime.utcfromtimestamp(decoded['exp']):
