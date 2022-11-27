@@ -50,4 +50,4 @@ jobs:
         run: docker push $IMAGE_NAME
       
       - name : Deploy Docker Image
-        run: gcloud run deploy labinventory-backend --image $IMAGE_NAME --region us-central1 --allow-unauthenticated --platform managed --port 8080 --set-env-vars "FLASK_APP=app.py,FLASK_ENV=development,FLASK_DEBUG=True,SECRET_KEY=${{ secrets.SECRET_KEY }},MONGO_DATABASE=${{ secrets.MONGO_DATABASE }},OAUTHLIB_INSECURE_TRANSPORT=1,FRONTEND_URL=${{ secrets.FRONTEND_URL }},BACKEND_URL=${{ secrets.BACKEND_URL }},FLASK_RUN_PORT=8080,FLASK_RUN_HOST=0.0.0.0"
+        run: gcloud run deploy labinventory-backend --image $IMAGE_NAME --region us-central1 --allow-unauthenticated --platform managed --port 8080 --update-env-vars "FLASK_APP=app.py,FLASK_ENV=development,FLASK_DEBUG=True,SECRET_KEY=${{ secrets.SECRET_KEY }},MONGO_DATABASE=${{ secrets.MONGO_DATABASE }},OAUTHLIB_INSECURE_TRANSPORT=1,FRONTEND_URL=${{ secrets.FRONTEND_URL }},BACKEND_URL=${{ secrets.BACKEND_URL }},FLASK_RUN_PORT=8080,FLASK_RUN_HOST=0.0.0.0"

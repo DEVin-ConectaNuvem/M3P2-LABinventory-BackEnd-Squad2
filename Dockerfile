@@ -7,8 +7,8 @@ ENV FLASK_RUN_HOST=0.0.0.0
 ENV FLASK_RUN_PORT=8080
 ENV SECRET_KEY=ALGUMSEGREDO
 ENV OAUTHLIB_INSECURE_TRANSPORT=1
-ENV FRONTEND_URL=http://localhost:3000/
-ENV BACKEND_URL=http://localhost:8080/
+ENV FRONTEND_URL=https://labinventory-devinhouse.web.app/
+ENV BACKEND_URL=https://labinventory-backend-vjqcwqvuka-uc.a.run.app/
 ENV PORT=8080
 
 WORKDIR /app

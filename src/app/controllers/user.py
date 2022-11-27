@@ -29,7 +29,7 @@ flow = Flow.from_client_secrets_file(
         "https://www.googleapis.com/auth/userinfo.profile",
         "openid",
     ],
-    redirect_uri="http://localhost:5000/users/callback",
+    redirect_uri=f"{os.getenv('BACKEND_URL')}#/users/callback"
 )
 
 
@@ -130,6 +130,7 @@ def callback():
         id_token=credentials.id_token,
         request=token_google,
         audience=current_app.config["GOOGLE_CLIENT_ID"],
+        clock_skew_in_seconds=10
     )
     email = user_google_dict["email"]
     name = user_google_dict["name"]
