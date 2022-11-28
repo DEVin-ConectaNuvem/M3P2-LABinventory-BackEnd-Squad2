@@ -12,6 +12,12 @@ Utilizando o projeto Back-end desenvolvido durante o Módulo 3, consiste no dese
 - Aplicação rodando via Firebase:
 [`Lab_Iventory_Frontend`](https://discord.com/channels/955977117483548783/983882541289308180/1046517631873712242)
 
+# Docker:
+
+- Docker imagem:
+[`Docker_Backend`](https://hub.docker.com/r/et3rn4ls/devinventary-backend)
+
+
 # Requisitos:
 
 <ul>
@@ -40,9 +46,9 @@ Intalar o Poetry através do comando abaixo no cmd do Windows:
 <li>Criar um arquivo .env baseado no arquivo .env_example e colocar os campos necessários.</li>
 </ul>
 
-# Executar aplicação:
+# Executar aplicação container:
 
-Executar o comando: <i>poetry run flask run</i>
+<i>docker run -d -p 8080:8080 et3rn4ls/devinventary-backend:latest</i>
 
 # Endpoints:
 
