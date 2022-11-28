@@ -10,7 +10,7 @@ Utilizando o projeto Back-end desenvolvido durante o Módulo 3, consiste no dese
 [`Lab_Inventory_Frontend`](https://github.com/DEVin-ConectaNuvem/M3P2-LABinventory-FrontEnd-Squad2)
 
 - Aplicação rodando via Firebase:
-[`Lab_Iventory_Frontend`](https://discord.com/channels/955977117483548783/983882541289308180/1046517631873712242)
+[`Lab_Iventory_Frontend`](https://labinventory-backend-vjqcwqvuka-uc.a.run.app/)
 
 # Docker:
 
